@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
@@ -13,7 +14,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cloud": "node server.js cloud",
+    "server": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

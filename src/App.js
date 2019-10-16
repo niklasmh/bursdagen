@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import logo from './logo.svg'
 import './App.css'
 
 function App() {
@@ -47,7 +46,7 @@ function App() {
   }, [ws, videoes])
 
   const playVideo = video => {
-    if (ws) ws.send(video)
+    if (ws) ws.send(`broadcast:${video}`)
   }
 
   return (
