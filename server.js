@@ -78,7 +78,6 @@ function sendMessage(ws, status, data = {}) {
 
 wss.on('connection', ws => {
   ws.on('message', message => {
-    console.log(message)
     const broadcastRegex = /^broadcast\:/
     if (broadcastRegex.test(message)) {
       message = message.replace(broadcastRegex, '')
@@ -88,11 +87,10 @@ wss.on('connection', ws => {
             file: message,
           })
         })
-      } else {
-        console.log('playing video: ' + message)
       }
     } else {
       if (IS_LOCAL) {
+        console.log('playing video: ' + message)
         playVideo(message, ws, time => {
           sendMessage(ws, 'play', {
             file: message,

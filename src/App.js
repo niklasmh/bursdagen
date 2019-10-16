@@ -25,7 +25,6 @@ function App() {
         if (IS_LOCAL) {
           try {
             const { status, ...result } = JSON.parse(data)
-            console.log(data)
             switch (status) {
               case 'play':
                 if (wsLocal) wsLocal.send(result.file)
