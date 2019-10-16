@@ -5,6 +5,12 @@ const IS_LOCAL = process.env.REACT_APP_IS_LOCAL !== 'false'
 const WS_URL_CLOUD = process.env.REACT_APP_CLOUD
 const WS_URL_LOCAL = process.env.REACT_APP_LOCAL
 
+if (IS_LOCAL) {
+  setTimeout(() => {
+    window.location.reload()
+  }, 60000)
+}
+
 function App() {
   const [videoes, setVideoes] = useState([])
   const [wsLocal, setWsLocal] = useState(null)
