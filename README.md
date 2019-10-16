@@ -2,7 +2,7 @@
 
 ## Local (with VLC player)
 
-First install dependencies
+First install dependencies:
 
 ```bash
 # shell
@@ -27,23 +27,16 @@ REACT_APP_CLOUD=ws://bursdagws.niklasmh.no
 REACT_APP_LOCAL=ws://localhost:8999
 ```
 
-Then you need the backend
-
-```bash
-#shell
-yarn server
-```
-
-Then you need to run the frontend
+Then you need to run both tha backend and the frontend:
 
 ```bash
 # shell
-yarn start
+yarn birthday
 ```
 
 ## Cloud (if you want to host it yourself)
 
-First install dependencies
+First install dependencies:
 
 ```bash
 # shell
@@ -68,14 +61,14 @@ module.exports = [
 ]
 ```
 
-Then you need the backend
+Then you need the backend:
 
 ```bash
 # shell
 yarn server cloud
 ```
 
-Then you need to run the frontend
+Then you need to run the frontend:
 
 ```bash
 # shell

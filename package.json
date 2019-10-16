@@ -15,8 +15,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cloud": "node server.js cloud",
-    "server": "node server.js"
+    "cloud": "node server cloud",
+    "server": "node server",
+    "birthday": "node server & react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
