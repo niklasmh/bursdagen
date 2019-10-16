@@ -70,7 +70,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>{IS_LOCAL ? 'Local' : 'Cloud'}</h1>
+        <h1>
+          {IS_LOCAL ? 'La denne kjøre i bakgrunnen' : 'Nå er det bursdag'}
+        </h1>
         {IS_LOCAL
           ? null
           : videoes.map((e, i) => (
