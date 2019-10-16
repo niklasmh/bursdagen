@@ -12,10 +12,10 @@ function App() {
 
   useEffect(() => {
     setWsCloud(new WebSocket(WS_URL_CLOUD))
-    setWsLocal(new WebSocket(WS_URL_LOCAL))
+    if (IS_LOCAL) setWsLocal(new WebSocket(WS_URL_LOCAL))
     return () => {
-      setWsLocal(null)
       setWsCloud(null)
+      if (IS_LOCAL) setWsLocal(null)
     }
   }, [])
 
