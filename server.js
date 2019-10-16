@@ -56,8 +56,7 @@ async function playVideo(video, ws = null, beforePlay = time => {}) {
   const time = hours * 3600 + minutes * 60 + seconds
   beforePlay(time)
   try {
-    await exec(`timeout 1s vlc ./videoes/${video}`)
-    //await exec(`timeout ${time}s vlc ./videoes/${video} --fullscreen`)
+    await exec(`timeout ${time}s vlc ./videoes/${video} --fullscreen`)
   } catch (e) {}
 
   sendMessage(ws, 'done', {
