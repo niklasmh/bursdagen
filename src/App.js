@@ -6,7 +6,7 @@ function App() {
   const [ws, setWs] = useState(null)
 
   useEffect(() => {
-    var ws = new WebSocket('ws://localhost:8999')
+    var ws = new WebSocket(process.env.REACT_APP_LOCAL)
     setWs(ws)
     ws.onopen = function() {}
     return () => {

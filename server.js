@@ -34,9 +34,9 @@ const getPort = url => {
 }
 
 if (IS_CLOUD) {
-  process.env['PORT'] = getPort(process.env.REACT_APP_CLOUD)
+  process.env['PORT'] = getPort(process.env.CLOUD)
 } else {
-  process.env['PORT'] = getPort(process.env.REACT_APP_LOCAL)
+  process.env['PORT'] = getPort(process.env.LOCAL)
 }
 
 const app = express()
