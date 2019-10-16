@@ -56,7 +56,8 @@ async function playVideo(video, ws = null, beforePlay = time => {}) {
   const time = hours * 3600 + minutes * 60 + seconds
   beforePlay(time)
   try {
-    await exec(`timeout ${time}s vlc ./videoes/${video} --fullscreen`)
+    await exec(`timeout 1s vlc ./videoes/${video}`)
+    //await exec(`timeout ${time}s vlc ./videoes/${video} --fullscreen`)
   } catch (e) {}
 
   sendMessage(ws, 'done', {
@@ -80,25 +81,25 @@ wss.on('connection', ws => {
     console.log(message)
     const broadcastRegex = /^broadcast\:/
     if (broadcastRegex.test(message)) {
-      console.log('broadcasting')
       message = message.replace(broadcastRegex, '')
-      wss.clients.forEach(client => {
-        if (client != ws) {
-          playVideo(message, ws, time => {
-            sendMessage(ws, 'play', {
-              file: message,
-              time,
-            })
+      if (IS_CLOUD) {
+        wss.clients.forEach(client => {
+          sendMessage(client, 'play', {
+            file: message,
           })
-        }
-      })
-    } else {
-      playVideo(message, ws, time => {
-        sendMessage(ws, 'play', {
-          file: message,
-          time,
         })
-      })
+      } else {
+        console.log('playing video: ' + message)
+      }
+    } else {
+      if (IS_LOCAL) {
+        playVideo(message, ws, time => {
+          sendMessage(ws, 'play', {
+            file: message,
+            time,
+          })
+        })
+      }
     }
   })
 
