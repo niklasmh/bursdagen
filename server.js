@@ -49,14 +49,26 @@ try {
 } catch (ex) {}
 
 async function playVideo(video, ws = null, beforePlay = time => {}) {
-  const { stdout } = await exec(
-    `ffmpeg -i ./videoes/${video} 2>&1 | grep "Duration" | cut -d ' ' -f 4 | sed s/,//`,
-  )
-  const [hours, minutes, seconds] = stdout.split(':').map(e => parseFloat(e))
+  let timeContent = ''
+  try {
+    const { stdout, stderr } = await exec(`ffmpeg -i ./videoes/${video}`)
+    timeContent = stdout + stderr
+  } catch (e) {
+    timeContent = JSON.stringify(e)
+  }
+  const start = timeContent.split(/\d\d:\d\d:\d\d.\d\d/)[0].length
+  const [hours, minutes, seconds] = timeContent
+    .slice(start, start + 11)
+    .split(':')
+    .map(e => parseFloat(e))
   const time = hours * 3600 + minutes * 60 + seconds
   beforePlay(time)
   try {
-    await exec(`timeout ${time}s vlc ./videoes/${video} --fullscreen`)
+    if (~process.platform.indexOf('win')) {
+      await exec(`vlc ./videoes/${video} --fullscreen --play-and-exit`)
+    } else {
+      await exec(`timeout ${time}s vlc ./videoes/${video} --fullscreen`)
+    }
   } catch (e) {}
 
   sendMessage(ws, 'done', {
